@@ -117,7 +117,7 @@ function generateRandomPassword() {
 const add_user = async(req, res) => {
     try {
         const { name, email, mobile, address, plan, caller } = req.body;
-        // Check if all required fields are provided
+
         if (!name || !email || !mobile || !address || !plan || !caller) {
             return res.status(400).json({ message: 'All fields are required.' });
         }
@@ -127,14 +127,9 @@ const add_user = async(req, res) => {
         if (existsUser) {
             return res.status(400).json({ message: 'Email Already Exists...' });
         }
-        // Generate a random password
+
         const password = generateRandomPassword();
-        // // Set the startDate to the current date (only date part)
-        // const startDate = new Date().toLocaleDateString('en-CA'); // Adjust locale if necessary
-        // // Set the endDate to 5 days from the current date (only date part)
-        // const endDate = new Date();
-        // endDate.setDate(endDate.getDate() + 5);
-        // const endDateFormatted = endDate.toLocaleDateString('en-CA'); // Adjust locale if necessary
+
         const newUser = new User({
             name,
             email,
@@ -142,16 +137,15 @@ const add_user = async(req, res) => {
             address,
             plan,
             caller,
-            // startDate,
-            // endDate: endDateFormatted,
+
             status: 'Registered',
             password,
             totalAssignment: 520,
             pendingAssignment: 520,
         });
-        // Save the new user
+
         const savedUser = await newUser.save();
-        // Send confirmation email with PDF attachment
+
         await sendConfirmationEmail(email, password);
         res.status(201).json({ message: 'User added successfully', user: savedUser });
     } catch (error) {
