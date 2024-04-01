@@ -5,7 +5,7 @@ require('dotenv').config();
 const sendConfirmationEmail = require('../Utils/mail.js');
 const generateuserToken = require('../Utils/tokengenerator.js');
 const { generateRandomPassword } = require('../Utils/randompassword.js');
-
+const { generateOTP, sendOTPEmail } = require('../Utils/otp.js');
 
 
 
@@ -92,6 +92,31 @@ const userlogin = async(req, res) => {
 };
 
 
+const forgot_password = async(req, res) => {
+    const { email } = req.body;
+    try {
+        const user = await User.findOne({ email });
+        if (user) {
+            const otp = generateOTP();
+            user.passwordResetOTP = otp;
+            try {
+                const updatedUser = await user.save();
+                // Send OTP to user's email
+                await sendOTPEmail(user.email, otp);
+                res.json({ message: 'User verified successfully, and OTP sent via mail.', user_id: user._id });
+            } catch (saveError) {
+                console.error('Error saving user:', saveError);
+                res.status(500).json({ error: 'Error saving user data.' });
+            }
+        } else {
+            res.status(401).json({ error: 'Invalid credentials.' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
 
 
-module.exports = { add_user, userlogin };
+
+module.exports = { add_user, userlogin, forgot_password };
