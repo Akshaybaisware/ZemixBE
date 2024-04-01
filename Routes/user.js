@@ -1,3 +1,5 @@
+/* This code snippet is setting up routes for handling various user-related functionalities in a
+Node.js application using Express framework. Here's a breakdown of what the code is doing: */
 const router = require('express').Router();
 
 const {
