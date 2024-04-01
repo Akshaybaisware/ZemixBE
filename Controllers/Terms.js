@@ -6,6 +6,7 @@ const Agreement = require("../Models/Aggrement");
 const add_terms = async (req, res) => {
   try {
     const { email, startdate } = req.body;
+    console.log("req.bode", req.body);
 
     if (!req.files || !req.files["signature"] || !req.files["photo"]) {
       return res

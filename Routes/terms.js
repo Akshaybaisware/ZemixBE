@@ -7,7 +7,17 @@ const {
     search_agreement
 } = require("../Controllers/Terms");
 
-router.post("/addterms", add_terms);
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+
+router.post("/addterms", upload.fields([
+    { name: 'signature', maxCount: 1 },
+    { name: 'photo', maxCount: 1 }
+]), add_terms);
+
+
 router.get("/getterms", get_terms);
 router.get("/gettermsbyid/:id", get_terms_by_id);
 router.post("/searchagreement", search_agreement);
