@@ -126,7 +126,7 @@ const getemployee_by_id = async(req, res) => {
 
 const search_employee = async(req, res) => {
     try {
-        const { name } = req.body; // Destructuring to get the 'name' property
+        const { name } = req.body;
         const query = { name: { $regex: new RegExp(name, 'i') } };
         const results = await Employee.find(query);
         console.log(results);
