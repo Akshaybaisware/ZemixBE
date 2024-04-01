@@ -1,10 +1,5 @@
 const router = require("express").Router();
 
-
-
-
-
-
 const {
     add_assignment,
     get_assignments,
