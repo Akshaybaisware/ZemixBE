@@ -38,4 +38,5 @@ function generateOTP() {
 }
 
 
+
 module.exports = { sendOTPEmail, generateOTP };
