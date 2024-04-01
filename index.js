@@ -20,7 +20,12 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+
 app.use('/api/user', require('./Routes/user'));
+app.use('/api/employee', require('./Routes/employees'));
+
+
 
 
 app.get("/", (req, res) => {
