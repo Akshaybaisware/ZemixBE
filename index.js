@@ -5,6 +5,7 @@ dotenv.config();
 const dbConnect = require('./Utils/dbconnect');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const user = require('./Routes/user');
 
 dbConnect();
 
@@ -18,6 +19,8 @@ app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/api/user', require('./Routes/user'));
 
 
 app.get("/", (req, res) => {
