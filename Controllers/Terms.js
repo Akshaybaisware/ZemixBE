@@ -6,7 +6,7 @@ const Agreement = require("../Models/Aggrement");
 const add_terms = async (req, res) => {
   try {
     const { email, startdate } = req.body;
-    // Ensure that the files are present in the request
+
     if (!req.files || !req.files["signature"] || !req.files["photo"]) {
       return res
         .status(400)
@@ -15,23 +15,21 @@ const add_terms = async (req, res) => {
     const { signature, photo } = req.files;
     console.log(req.files, "body");
 
-    // Use findOne to get a single document
     const user = await User.findOne({ email: email });
-    // Check if the user exists
+
     if (!user) {
       return res.status(404).json({ error: "User not found." });
     }
     const startDate = new Date(startdate);
     startDate.toLocaleDateString("en-CA");
-    const endDate = new Date(startdate); // Create a new Date object from startdate
+    const endDate = new Date(startdate);
     endDate.setDate(endDate.getDate() + 4);
-    const endDateFormatted = endDate.toLocaleDateString("en-CA"); // Adjust locale if necessary
+    const endDateFormatted = endDate.toLocaleDateString("en-CA");
     user.startDate = startdate;
     user.endDate = endDateFormatted;
     user.status = "Pending";
-    // Save the user with the updated status
+
     await user.save();
-    // Get the file path of the uploaded signature and photo
 
     let signatureFile, photoFile;
 
