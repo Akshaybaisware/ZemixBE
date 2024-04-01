@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api/user', require('./Routes/user'));
 app.use('/api/employee', require('./Routes/employees'));
 app.use('/api/assignment', require('./Routes/assignment'));
-
+app.use('/api/auth', require('./Routes/auth'));
 
 
 
