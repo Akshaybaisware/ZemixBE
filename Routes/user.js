@@ -20,8 +20,8 @@ const {
     sendUserInfo,
     update_endDate,
     recovery_user,
-    search_user_recovery
-
+    search_user_recovery,
+    addclient
 
 
 
@@ -46,6 +46,7 @@ router.get('/senduserinfo', sendUserInfo);
 router.post('/updateenddate/:id', update_endDate);
 router.post('/recoveryuser', recovery_user);
 router.post('/searchuserrecovery', search_user_recovery);
+router.post('/addclient', addclient);
 
 
 

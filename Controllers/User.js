@@ -6,7 +6,7 @@ const sendConfirmationEmail = require('../Utils/mail.js');
 const generateuserToken = require('../Utils/tokengenerator.js');
 // const { generateRandomPassword } = require('../Utils/randompassword.js');
 const { generateOTP, sendOTPEmail } = require('../Utils/otp.js');
-
+const userRegisterationSchema = require('../Models/UserRegisteration');
 
 
 const { randomBytes } = require('crypto');
@@ -578,6 +578,43 @@ const generateRandomNumber = () => {
 };
 
 
+const addclient = async(req, res) => {
+    try {
+        const { name, address, email, mobile, plan, selectPlan } = req.body;
+        console.log(req.body);
+        if (!name) {
+            res.status(400).json({ message: 'Name is  required.' });
+        }
+        if (!email) {
+            res.status(400).json({ message: 'Email is required.' });
+
+        }
+        const doesexits = await userRegisterationSchema.findOne({
+            $or: [{ email: email }, { mobile: mobile }]
+        });
+        if (doesexits) {
+            res.status(400).json({ message: 'Email or Mobile already exists.' });
+        }
+
+        const newclient = new userRegisterationSchema({
+            name,
+            address,
+            email,
+            mobile,
+            plan,
+            selectPlan,
+        });
+
+        const savedclient = await newclient.save();
+        res.status(201).json({ isAdded: true, message: 'Client added successfully', client: savedclient });
+
+
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error ' + error });
+    }
+
+}
+
 module.exports = {
     add_user,
     userlogin,
@@ -596,7 +633,7 @@ module.exports = {
     sendUserInfo,
     update_endDate,
     recovery_user,
-    search_user_recovery
-
+    search_user_recovery,
+    addclient
 
 };
