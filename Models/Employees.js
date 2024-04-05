@@ -10,6 +10,9 @@ const employeeSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
+    branch: {
+        type: String,
+    },
     password: {
         type: String,
     },

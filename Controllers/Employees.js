@@ -3,7 +3,7 @@ const Employee = require('../Models/Employees');
 
 const add_employee = async(req, res) => {
     try {
-        const { name, email, mobile, address, salary, designation } = req.body;
+        const { name, email, mobile, address, salary, designation, branch } = req.body;
         // Check required fields are provided
         if (!name || !email || !mobile) {
             return res.status(400).json({ message: 'All fields are required.' });
@@ -20,10 +20,16 @@ const add_employee = async(req, res) => {
             address,
             salary,
             designation,
+            branch
         });
         // Save the new employee
         const savedEmployee = await newEmployee.save();
-        res.status(201).json({ message: 'Employee added successfully', employee: savedEmployee });
+        res.status(201).json({
+            isAdded: true,
+
+            message: 'Employee added successfully',
+            employee: savedEmployee
+        });
     } catch (error) {
         console.error('Error adding employee:', error);
         res.status(500).json({ message: 'Internal Server Error' });
