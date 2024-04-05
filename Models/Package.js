@@ -9,7 +9,7 @@ const packageSchema = new mongoose.Schema({
     noofFroms: {
         type: String,
     },
-    date: {
+    days: {
         type: String
     }
 

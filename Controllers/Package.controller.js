@@ -3,10 +3,10 @@ const package = require('../Models/Package');
 const add_package = async(req, res) => {
     try {
 
-        const { packagename, noofFroms, date } = req.body;
+        const { packagename, noofFroms, days } = req.body;
 
         // Check if all required fields are provided
-        if (!packagename || !noofFroms || !date) {
+        if (!packagename || !noofFroms || !days) {
             return res.status(400).json({ message: "All fields are required." });
         }
         const newPackage = new package({
