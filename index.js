@@ -17,7 +17,7 @@ app.use('/api/employee', require('./Routes/employees'));
 app.use('/api/assignment', require('./Routes/assignment'));
 app.use('/api/auth', require('./Routes/auth'));
 app.use('/api/terms', require('./Routes/terms'));
-
+app.use('/api/package', require('./Routes/package'));
 // Default route
 app.get("/", (req, res) => {
     res.send("Hello World");
