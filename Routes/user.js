@@ -23,7 +23,14 @@ const {
     search_user_recovery,
     addclient,
     get_all_client,
-    getallclients
+    getallclients,
+    getallinactiveusers,
+    getallpending,
+    getallfreez,
+    getallsuccess,
+    getallactive,
+    getallcancel,
+    getallregistered
 
 
 
@@ -50,7 +57,13 @@ router.post('/recoveryuser', recovery_user);
 router.post('/searchuserrecovery', search_user_recovery);
 router.post('/addclient', addclient);
 router.get('/getallclient', getallclients);
-
+router.get('/getallinactiveusers', getallinactiveusers);
+router.get('/getallpending', getallpending);
+router.get('/getallfreez', getallfreez);
+router.get('/getallsuccess', getallsuccess);
+router.get('/getallactive', getallactive);
+router.get('/getallcancel', getallcancel);
+router.get('/getallregistered', getallregistered);
 
 
 

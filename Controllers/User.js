@@ -629,6 +629,82 @@ const getallclients = async(req, res) => {
     };
 }
 
+const getallinactiveusers = async(req, res) => {
+    try {
+        const users = await User.find({ status: 'InActive' });
+        res.status(200).json({ users, message: 'All Inactive Users' });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+
+const getallpending = async(req, res) => {
+    try {
+        const users = await User.find({ status: 'Pending' });
+        res.status(200).json({ users, message: 'All Pending Users' });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+
+
+const getallregistered = async(req, res) => {
+    try {
+        const users = await User.find({ status: 'Registered' });
+        res.status(200).json({ users, message: 'All Registered Users' });
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    };
+
+}
+const getallfreez = async(req, res) => {
+    try {
+        const users = await User.find({ status: 'Freeze' });
+        res.status(200).json({ users, message: 'All Freeze Users' });
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+
+    }
+}
+
+const getallcancel = async(req, res) => {
+    try {
+        const users = await User.find({ status: 'Cancel' });
+        res.status(200).json({ users, message: 'All Cancel Users' });
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+
+}
+
+const getallactive = async(req, res) => {
+    try {
+        const users = await User.find({ status: 'Active' });
+        res.status(200).json({ users, message: 'All Active Users' });
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+
+
+}
+
+const getallsuccess = async(req, res) => {
+    try {
+        const users = await User.find({ status: 'Success' });
+        res.status(200).json({ users, message: 'All Success Users' });
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+
+
+}
+
 module.exports = {
     add_user,
     userlogin,
@@ -649,6 +725,13 @@ module.exports = {
     recovery_user,
     search_user_recovery,
     addclient,
-    getallclients
+    getallclients,
+    getallinactiveusers,
+    getallpending,
+    getallregistered,
+    getallfreez,
+    getallcancel,
+    getallactive,
+    getallsuccess
 
 };
