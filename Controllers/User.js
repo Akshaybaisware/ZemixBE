@@ -88,7 +88,7 @@ const userlogin = async(req, res) => {
         const currentDate = new Date();
         const userEndDate = new Date(user.endDate);
         const isWithin12Hours = new Date(userEndDate.getTime() + 12 * 60 * 60 * 1000);
-        res.status(200).json({ message: 'Login success..', role: user.role, token: generateuserToken(user) });
+        res.status(200).json({ message: 'Login success..', role: user.role, token: generateuserToken(user), email: user.email });
         // if (userEndDate > currentDate) {
         //     const timeDifference = userEndDate.getTime() - currentDate.getTime();
         //     const days = Math.floor(timeDifference / (1000 * 3600 * 24));
@@ -115,30 +115,68 @@ const userlogin = async(req, res) => {
 };
 
 
+// const forgot_password = async(req, res) => {
+//     const { email } = req.body;
+//     try {
+//         const user = await User.findOne({ email });
+//         if (user) {
+//             const otp = generateOTP();
+//             user.passwordResetOTP = otp;
+//             try {
+//                 const updatedUser = await user.save();
+//                 // Send OTP to user's email
+//                 await sendOTPEmail(user.email, otp);
+//                 res.json({ message: 'User verified successfully, and OTP sent via mail.', user_id: user._id });
+//             } catch (saveError) {
+//                 console.error('Error saving user:', saveError);
+//                 res.status(500).json({ error: 'Error saving user data.' });
+//             }
+//         } else {
+//             res.status(401).json({ error: 'Invalid credentials.' });
+//         }
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ error: 'Internal Server Error' });
+//     }
+// }
 const forgot_password = async(req, res) => {
-    const { email } = req.body;
     try {
-        const user = await User.findOne({ email });
-        if (user) {
-            const otp = generateOTP();
-            user.passwordResetOTP = otp;
-            try {
-                const updatedUser = await user.save();
-                // Send OTP to user's email
-                await sendOTPEmail(user.email, otp);
-                res.json({ message: 'User verified successfully, and OTP sent via mail.', user_id: user._id });
-            } catch (saveError) {
-                console.error('Error saving user:', saveError);
-                res.status(500).json({ error: 'Error saving user data.' });
-            }
-        } else {
-            res.status(401).json({ error: 'Invalid credentials.' });
+        console.log("trying");
+        // i wnat new password and confirm password from user as he is login the we alredy have email
+        const { newPassword, confirmPassword, userEmail } = req.body;
+        // const userEmail = req.user.email;
+        console.log(userEmail, "asdasd");
+        if (!newPassword || !confirmPassword) {
+            return res.status(400).json({ error: 'Both new password and confirm password are required' });
         }
+
+        // Check if newPassword and confirmPassword match
+        if (newPassword !== confirmPassword) {
+            return res.status(400).json({ error: 'Passwords do not match' });
+        }
+
+        const userdata = await User.findOne({ email: userEmail });
+
+        if (!userdata) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        userdata.password = newPassword;
+        await userdata.save();
+        res.status(200).json({ message: 'Password changed successfully', user: userdata });
+
+        // At this point, you have the newPassword and confirmPassword, and you can proceed with updating the user's password in your database
+        // Implement your password update logic here
+
+        // Respond with success message
+
+
+
+
     } catch (error) {
-        console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
-}
+};
 
 const verify_otp = async(req, res) => {
     const { passwordResetOTP } = req.body; // Destructure the passwordResetOTP from req.body
@@ -743,5 +781,5 @@ module.exports = {
     getallcancel,
     getallactive,
     getallsuccess,
-    gettodaysregisterations
+    gettodaysrecovery
 };
