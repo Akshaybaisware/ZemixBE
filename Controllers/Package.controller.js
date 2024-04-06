@@ -27,6 +27,17 @@ const add_package = async(req, res) => {
     }
 };
 
+const getallpackage = async(req, res) => {
+    try {
+        const allpackages = await packageSchema.find();
+        res.status(200).json({ allpackages });
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+
+}
+
 module.exports = {
-    add_package
+    add_package,
+    getallpackage
 };
