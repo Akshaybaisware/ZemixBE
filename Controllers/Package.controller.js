@@ -1,19 +1,20 @@
-const package = require('../Models/Package');
+const packageSchema = require('../Models/Package');
 
 const add_package = async(req, res) => {
     try {
-
         const { packagename, noofFroms, days } = req.body;
 
         // Check if all required fields are provided
         if (!packagename || !noofFroms || !days) {
             return res.status(400).json({ message: "All fields are required." });
         }
-        const newPackage = new package({
+
+        const newPackage = new packageSchema({
             packagename,
             noofFroms,
-            date
+            days // Changed from date to days
         });
+
         const savedPackage = await newPackage.save();
         res.status(201).json({
             isAdded: true,
@@ -21,10 +22,8 @@ const add_package = async(req, res) => {
             package: savedPackage,
         });
 
-
     } catch (error) {
         res.status(500).json({ message: "Internal Server Error" });
-
     }
 };
 
