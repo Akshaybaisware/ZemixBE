@@ -21,7 +21,9 @@ const {
     update_endDate,
     recovery_user,
     search_user_recovery,
-    addclient
+    addclient,
+    get_all_client,
+    getallclients
 
 
 
@@ -47,6 +49,7 @@ router.post('/updateenddate/:id', update_endDate);
 router.post('/recoveryuser', recovery_user);
 router.post('/searchuserrecovery', search_user_recovery);
 router.post('/addclient', addclient);
+router.get('/getallclient', getallclients);
 
 
 

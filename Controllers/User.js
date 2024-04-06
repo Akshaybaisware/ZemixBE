@@ -615,6 +615,20 @@ const addclient = async(req, res) => {
 
 }
 
+const getallclients = async(req, res) => {
+    try {
+        const data = await userRegisterationSchema.find();
+        res.status(200).json({ isAvailable: true, data, messgae: "Sucessfully get the data " });
+
+
+
+    } catch (error) {
+
+        res.status(500).json({ error: 'Internal Server Error' });
+
+    };
+}
+
 module.exports = {
     add_user,
     userlogin,
@@ -634,6 +648,7 @@ module.exports = {
     update_endDate,
     recovery_user,
     search_user_recovery,
-    addclient
+    addclient,
+    getallclients
 
 };
