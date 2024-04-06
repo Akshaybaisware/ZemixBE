@@ -705,6 +705,16 @@ const getallsuccess = async(req, res) => {
 
 }
 
+const gettodaysrecovery = async(req, res) => {
+    try {
+        const users = await User.find({ status: 'Success' });
+        res.status(200).json({ users, message: 'All Success Users' });
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+
+}
+
 module.exports = {
     add_user,
     userlogin,
@@ -732,6 +742,6 @@ module.exports = {
     getallfreez,
     getallcancel,
     getallactive,
-    getallsuccess
-
+    getallsuccess,
+    gettodaysregisterations
 };

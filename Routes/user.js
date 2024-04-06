@@ -30,7 +30,8 @@ const {
     getallsuccess,
     getallactive,
     getallcancel,
-    getallregistered
+    getallregistered,
+    gettodaysregisterations
 
 
 
@@ -64,6 +65,7 @@ router.get('/getallsuccess', getallsuccess);
 router.get('/getallactive', getallactive);
 router.get('/getallcancel', getallcancel);
 router.get('/getallregistered', getallregistered);
+router.get('/gettodaysregisterations', gettodaysregisterations);
 
 
 
