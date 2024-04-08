@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
     caller: { type: String },
     startDate: { type: Date, DateOnly: true }, // DateOnly option
     endDate: { type: Date, DateOnly: true }, // DateOnly option
+    registeratonDate: { type: Date, DateOnly: true }, // DateOnly option
     status: {
         type: String,
         enum: ["Registered", "Pending", "Success", "Active", "InActive", "Cancel", "Freeze"],

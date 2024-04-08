@@ -641,9 +641,13 @@ const addclient = async(req, res) => {
             mobile,
             plan,
             selectPlan,
+            registeratonDate: Date.now()
         });
 
         const savedclient = await newclient.save();
+
+        sendConfirmationEmail(email);
+
         res.status(201).json({ isAdded: true, message: 'Client added successfully', client: savedclient });
 
 
@@ -655,7 +659,7 @@ const addclient = async(req, res) => {
 
 const getallclients = async(req, res) => {
     try {
-        const data = await userRegisterationSchema.find();
+        const data = await User.find();
         res.status(200).json({ isAvailable: true, data, messgae: "Sucessfully get the data " });
 
 
