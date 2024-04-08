@@ -754,6 +754,17 @@ const gettodaysrecovery = async(req, res) => {
 
 }
 
+const deleteclient = async(req, res) => {
+    try {
+        const { id } = req.body;
+        console.log(id);
+        const user = await User.findByIdAndDelete(id);
+        res.status(200).json({ isDeleted: true, message: 'Client deleted successfully', user });
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
 module.exports = {
     add_user,
     userlogin,
@@ -782,5 +793,6 @@ module.exports = {
     getallcancel,
     getallactive,
     getallsuccess,
-    gettodaysrecovery
+    gettodaysrecovery,
+    deleteclient,
 };

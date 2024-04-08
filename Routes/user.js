@@ -31,7 +31,8 @@ const {
     getallactive,
     getallcancel,
     getallregistered,
-    gettodaysrecovery
+    gettodaysrecovery,
+    deleteclient
 
 
 
@@ -66,7 +67,7 @@ router.get('/getallactive', getallactive);
 router.get('/getallcancel', getallcancel);
 router.get('/getallregistered', getallregistered);
 router.get('/gettodaysregisterations', gettodaysrecovery);
-
+router.delete('/deleteclient', deleteclient);
 
 
 

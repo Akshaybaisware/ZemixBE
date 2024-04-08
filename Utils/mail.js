@@ -24,77 +24,7 @@ const sendConfirmationEmail = async(email, password) => {
             from: process.env.EMAIL,
             to: email,
             subject: 'Registration Confirmation - Crompton Services',
-            //   html: `
-            //   <html>
-            //   <head>
-            //     <style>
-            //       body {
-            //         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            //         line-height: 1.6;
-            //         color: black;
-            //         margin: 0;
-            //         padding: 0;
-            //       }
-            //       .container {
-            //         max-width: 600px;
-            //         margin: 0 auto;
-            //       }
-            //       .header {
-            //         background-color: #007bff;
-            //         padding: 20px;
-            //         text-align: center;
-            //         color: #fff;
-            //       }
-            //       .content {
-            //         padding: 20px;
-            //         border: 1px solid #ddd;
-            //         border-radius: 5px;
-            //         background-color: #fff;
-            //       }
-            //       h2 {
-            //         color: white;
-            //       }
-            //       strong {
-            //         color: #007bff;
-            //       }
-            //       a {
-            //         color: blue;
-            //       }
-            //       p {
-            //         margin: 0 0 15px;
-            //       }
-            //       .link{
-            //           color:blue;
-            //       }
-            //     </style>
-            //   </head>
-            //   <body>
-            //     <div class="container">
-            //       <div class="header">
-            //         <h2 >Zemex Service</h2>
-            //       </div>
-            //       <div class="content">
-            //         <p>
-            //           <span>Dear User,</span>
-            //         </p>
-            //         <p>
-            //           Thank you for choosing Crompton Services. You have been successfully registered for the Data Entry Services.
-            //         </p>
-            //         <p>
-            //         <p class="link"> Submit Your Agreement Form </p>
 
-            //         </p>
-            //         <p>
-            //           <p>Company Information:</p>
-            //           <p>Helpline mail id:</p> helplinessrvice156@gmail.com<br>
-            //           <p>Helpline No : 8446258993 </a>
-            //          </p>
-            //         <!-- Remaining content... -->
-            //       </div>
-            //     </div>
-            //   </body>
-            // </html>
-            //   `,
             html: `<!DOCTYPE html>
            <html lang="en">
            <head>
