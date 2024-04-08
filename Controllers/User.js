@@ -621,17 +621,16 @@ const addclient = async(req, res) => {
         const { name, address, email, mobile, plan, selectPlan } = req.body;
         console.log(req.body);
         if (!name) {
-            res.status(400).json({ message: 'Name is  required.' });
+            return res.status(400).json({ message: 'Name is required.' });
         }
         if (!email) {
-            res.status(400).json({ message: 'Email is required.' });
-
+            return res.status(400).json({ message: 'Email is required.' });
         }
         const doesexits = await User.findOne({
-            $or: [{ email: email }, { mobile: mobile }]
+            $and: [{ email: email }, { mobile: mobile }]
         });
         if (doesexits) {
-            res.status(400).json({ message: 'Email or Mobile already exists.' });
+            return res.status(400).json({ message: 'Email or Mobile already exists.' });
         }
 
         const newclient = new User({
@@ -648,14 +647,12 @@ const addclient = async(req, res) => {
 
         sendConfirmationEmail(email);
 
-        res.status(201).json({ isAdded: true, message: 'Client added successfully', client: savedclient });
-
-
+        return res.status(201).json({ isAdded: true, message: 'Client added successfully', client: savedclient });
     } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error ' + error });
+        return res.status(500).json({ error: 'Internal Server Error ' + error });
     }
-
 }
+
 
 const getallclients = async(req, res) => {
     try {
