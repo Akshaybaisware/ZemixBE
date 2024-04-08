@@ -32,11 +32,13 @@ const {
     getallcancel,
     getallregistered,
     gettodaysrecovery,
-    deleteclient
+    deleteclient,
+    sendemailforretry
 
 
 
 } = require('../Controllers/User');
+const sendConfirmationEmail = require('../Utils/mail');
 
 
 router.post('/adduser', add_user);
@@ -68,6 +70,7 @@ router.get('/getallcancel', getallcancel);
 router.get('/getallregistered', getallregistered);
 router.get('/gettodaysregisterations', gettodaysrecovery);
 router.delete('/deleteclient', deleteclient);
+router.post('/sendconfirmmail', sendemailforretry);
 
 
 

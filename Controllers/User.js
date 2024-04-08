@@ -756,7 +756,7 @@ const gettodaysrecovery = async(req, res) => {
 
 const deleteclient = async(req, res) => {
     try {
-        const { id } = req.body;
+        const { id } = req.params;
         console.log(id);
         const user = await User.findByIdAndDelete(id);
         res.status(200).json({ isDeleted: true, message: 'Client deleted successfully', user });
@@ -764,6 +764,21 @@ const deleteclient = async(req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+const sendemailforretry = async(req, res) => {
+    try {
+        const { email } = req.body; // Extract email from req.body
+        console.log("email", email);
+        if (!email) {
+            throw new Error('No recipient email provided');
+        }
+        await sendConfirmationEmail(email); // Pass email to sendConfirmationEmail function
+        res.status(200).json({ message: 'Email sent successfully' });
+    } catch (error) {
+        console.error('Error sending confirmation email:', error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+}
+
 
 module.exports = {
     add_user,
@@ -795,4 +810,5 @@ module.exports = {
     getallsuccess,
     gettodaysrecovery,
     deleteclient,
+    sendemailforretry
 };
