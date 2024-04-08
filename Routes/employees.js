@@ -11,6 +11,7 @@ const {
     edit_employee,
     getemployee_by_id,
     search_employee,
+    deleteall,
 
 } = require('../Controllers/Employees.js');
 
@@ -21,6 +22,6 @@ router.delete('/deleteemployee/:id', delete_employee);
 router.put('/editemployee/:id', edit_employee);
 router.get('/getemployeebyid/:id', getemployee_by_id);
 router.post('/searchemployee', search_employee);
-
+router.delete('/deleteall', deleteall);
 
 module.exports = router;

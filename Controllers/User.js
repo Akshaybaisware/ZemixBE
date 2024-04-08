@@ -627,14 +627,14 @@ const addclient = async(req, res) => {
             res.status(400).json({ message: 'Email is required.' });
 
         }
-        const doesexits = await userRegisterationSchema.findOne({
+        const doesexits = await User.findOne({
             $or: [{ email: email }, { mobile: mobile }]
         });
         if (doesexits) {
             res.status(400).json({ message: 'Email or Mobile already exists.' });
         }
 
-        const newclient = new userRegisterationSchema({
+        const newclient = new User({
             name,
             address,
             email,

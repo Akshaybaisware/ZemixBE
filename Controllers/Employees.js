@@ -38,38 +38,59 @@ const add_employee = async(req, res) => {
 
 
 const get_all_employee = async(req, res) => {
+    // try {
+    //     const defaultPage = 1;
+    //     const defaultLimit = 10;
+    //     // Get page number and limit from query parameters
+    //     const { page = defaultPage, limit = defaultLimit } = req.query;
+    //     const pageNumber = parseInt(page, 10);
+    //     const limitNumber = parseInt(limit, 10);
+    //     if (isNaN(pageNumber) || isNaN(limitNumber) || pageNumber < 1 || limitNumber < 1) {
+    //         return res.status(400).json({ message: 'Invalid page or limit values.' });
+    //     }
+    //     // Get the total number of Employee
+    //     const totalUsers = await Employee.countDocuments();
+    //     // Calculate the total number of pages
+    //     const totalPages = Math.ceil(totalUsers / limitNumber);
+    //     // Ensure the requested page is within bounds
+    //     if (pageNumber > totalPages) {
+    //         return res.status(400).json({ message: 'Invalid page number.' });
+    //     }
+    //     // Calculate the skip value based on the page number and limit
+    //     const skip = (pageNumber - 1) * limitNumber;
+    //     const allemployee = await Employee.find().skip(skip).limit(limitNumber);
+    //     res.status(200).json({
+    //         allemployee,
+    //         currentPage: pageNumber,
+    //         totalPages,
+    //         totalUsers,
+    //     });
+    // } catch (error) {
+    //     console.log(error);
+    //     res.status(500).json({ error: 'Internal Server Error' });
+    // }
+
     try {
-        const defaultPage = 1;
-        const defaultLimit = 10;
-        // Get page number and limit from query parameters
-        const { page = defaultPage, limit = defaultLimit } = req.query;
-        const pageNumber = parseInt(page, 10);
-        const limitNumber = parseInt(limit, 10);
-        if (isNaN(pageNumber) || isNaN(limitNumber) || pageNumber < 1 || limitNumber < 1) {
-            return res.status(400).json({ message: 'Invalid page or limit values.' });
-        }
-        // Get the total number of Employee
-        const totalUsers = await Employee.countDocuments();
-        // Calculate the total number of pages
-        const totalPages = Math.ceil(totalUsers / limitNumber);
-        // Ensure the requested page is within bounds
-        if (pageNumber > totalPages) {
-            return res.status(400).json({ message: 'Invalid page number.' });
-        }
-        // Calculate the skip value based on the page number and limit
-        const skip = (pageNumber - 1) * limitNumber;
-        const allemployee = await Employee.find().skip(skip).limit(limitNumber);
-        res.status(200).json({
-            allemployee,
-            currentPage: pageNumber,
-            totalPages,
-            totalUsers,
-        });
+        const employee = await Employee.find().sort({ createdAt: -1 });
+        res.status(200).json({ isAdded: true, employee, message: 'All Employees sorted by most recent' });
     } catch (error) {
-        console.log(error);
         res.status(500).json({ error: 'Internal Server Error' });
+
     }
 }
+
+const deleteall = async(req, res) => {
+    try {
+        const result = await Employee.deleteMany({});
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ message: 'User not found.' });
+        }
+        res.status(200).json({ message: 'Employee deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
 
 const delete_employee = async(req, res) => {
     try {
@@ -157,5 +178,6 @@ module.exports = {
     delete_employee,
     edit_employee,
     getemployee_by_id,
-    search_employee
+    search_employee,
+    deleteall
 };

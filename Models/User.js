@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
     mobile: { type: String },
     address: { type: String },
     plan: { type: String },
+    selectPlan: { type: String },
     caller: { type: String },
     startDate: { type: Date, DateOnly: true }, // DateOnly option
     endDate: { type: Date, DateOnly: true }, // DateOnly option
