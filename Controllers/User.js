@@ -659,8 +659,8 @@ const addclient = async(req, res) => {
 
 const getallclients = async(req, res) => {
     try {
-        const data = await User.find();
-        res.status(200).json({ isAvailable: true, data, messgae: "Sucessfully get the data " });
+        const data = await User.find().sort({ createdAt: -1 });
+        res.status(200).json({ isAvailable: true, data, messgae: "Successfully retrieved the data sorted by createdAt" });
 
 
 
