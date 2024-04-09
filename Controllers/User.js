@@ -79,6 +79,7 @@ const add_user = async(req, res) => {
 const userlogin = async(req, res) => {
     try {
         const { email, password } = req.body;
+        console.log(email);
 
         const user = await User.findOne({ email, password });
         if (!user) {
