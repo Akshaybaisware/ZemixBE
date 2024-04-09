@@ -50,7 +50,7 @@ const userSchema = new mongoose.Schema({
     },
     totalAssingment: {
         type: Number,
-        default: 520
+        default: 480
     },
     submitdAssingment: {
         type: Number,

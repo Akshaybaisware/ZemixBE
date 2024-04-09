@@ -1,6 +1,6 @@
 const Assignment = require("../Models/Assignment");
 const User = require("../Models/User");
-
+const new_assignmentSchema = require("../Models/Assignment");
 
 
 const add_assignment = async(req, res) => {
@@ -130,10 +130,46 @@ const refresh_get_assignment_details = async(req, res) => {
     }
 };
 
+const addmultipleasignment = async(req, res) => {
+    try {
+        // const { userId } = req.params;
+        // const { userId, name, address, pinCode, jobFunctional, phone, annualRevenue, cleanCode } = req.body;
+
+        // Assuming req.body contains an array of customer assignments
+        const assignments = req.body;
+
+        // Loop through each assignment and insert it into the database
+        for (let i = 0; i < assignments.length; i++) {
+            const assignmentData = {
+                userId: assignments[i].userId,
+                name: assignments[i].name,
+                address: assignments[i].address,
+                pinCode: assignments[i].pinCode,
+                jobFunctional: assignments[i].jobFunctional,
+                phone: assignments[i].phone,
+                annualRevenue: assignments[i].annualRevenue,
+                cleanCode: assignments[i].cleanCode
+            };
+            const newAssignment = new new_assignmentSchema(assignmentData); // Assuming CustomerAssignment is your Mongoose model
+            await newAssignment.save();
+        }
+
+        res.status(201).json({ message: 'Assignments created successfully' });
+
+
+
+    } catch (error) {
+
+        res.status(500).json({ message: "Internal Server Error", Error: error.message });
+
+    }
+}
+
 module.exports = {
     add_assignment,
     get_assignments,
     get_totalAssignment,
     get_assignment_details,
     refresh_get_assignment_details,
+    addmultipleasignment
 };

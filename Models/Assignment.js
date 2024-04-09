@@ -17,7 +17,7 @@ const new_assignmentSchema = new mongoose.Schema({
         type: String, // Change this to String
     },
     annualRevenue: {
-        type: Number, // Change this to Number
+        type: String, // Change this to Number
     },
     cleanCode: {
         type: String,
