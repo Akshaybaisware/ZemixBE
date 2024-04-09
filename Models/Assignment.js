@@ -14,10 +14,10 @@ const new_assignmentSchema = new mongoose.Schema({
         type: String,
     },
     phone: {
-        type: String, // Change this to String
+        type: String,
     },
     annualRevenue: {
-        type: String, // Change this to Number
+        type: String,
     },
     cleanCode: {
         type: String,
