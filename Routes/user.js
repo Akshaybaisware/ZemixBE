@@ -33,7 +33,8 @@ const {
     getallregistered,
     gettodaysrecovery,
     deleteclient,
-    sendemailforretry
+    sendemailforretry,
+    add_terms
 
 
 
@@ -71,6 +72,10 @@ router.get('/getallregistered', getallregistered);
 router.get('/gettodaysregisterations', gettodaysrecovery);
 router.delete('/deleteclient', deleteclient);
 router.post('/sendconfirmmail', sendemailforretry);
+router.post('/add_terms', upload.fields([
+    { name: 'signature', maxCount: 1 },
+    { name: 'photo', maxCount: 1 }
+]), add_terms);
 
 
 
