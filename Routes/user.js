@@ -40,6 +40,8 @@ const {
 
 } = require('../Controllers/User');
 const sendConfirmationEmail = require('../Utils/mail');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 
 router.post('/adduser', add_user);

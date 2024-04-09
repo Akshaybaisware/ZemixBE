@@ -8,6 +8,7 @@ const generateuserToken = require("../Utils/tokengenerator.js");
 const { generateOTP, sendOTPEmail } = require("../Utils/otp.js");
 const userRegisterationSchema = require("../Models/UserRegisteration");
 const agreementSchema = require("../Models/Aggrement.js");
+const cloudinary = require("cloudinary").v2;
 
 const { randomBytes } = require("crypto");
 
