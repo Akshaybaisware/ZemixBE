@@ -484,8 +484,9 @@ const user_pagination = async (req, res) => {
 
 const sendUserInfo = async (req, res) => {
   try {
-    const { userId } = req.params;
-    console.log(userId, "userId");
+    // const { userId } = req.params;
+    // console.log(userId, "userId");
+    const userID = req.body;
     const user = await User.findById({ _id: userId });
     const aggrUserId = await Agreement.findOne({ email: user.email });
 
