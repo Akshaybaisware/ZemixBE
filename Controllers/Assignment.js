@@ -5,22 +5,22 @@ const new_assignmentSchema = require("../Models/Assignment");
 
 const add_assignment = async(req, res) => {
     try {
-        const userId = req.params.id;
-        const { name, address, pinCode, jobFunctional, phone, annualRevenue, cleanCode } = req.body;
+        // const userId = req.params.id;
+        const { userId, name, address, pinCode, jobFunctional, phone, annualRevenue, cleanCode } = req.body;
 
         // Check if all required fields are provided
-        if (!name || !address || !pinCode || !jobFunctional || !phone || !annualRevenue || !cleanCode) {
+        if (!name || !address || !pinCode || !jobFunctional || !phone || !annualRevenue) {
             return res.status(400).json({ message: "All fields are required." });
         }
 
         // Check if the name is unique (optional)
-        const existingAssignment = await new_Assignment.findOne({ name });
+        const existingAssignment = await new_assignmentSchema.findOne({ name });
         if (existingAssignment) {
             return res.status(400).json({ message: "Name already exists for an assignment." });
         }
         const globalId = getGlobalAssignmentDetailId();
         // Use the globalAssignmentDetailId directly
-        const newAssignment = new new_Assignment({
+        const newAssignment = new new_assignmentSchema({
             name,
             address,
             pinCode,
