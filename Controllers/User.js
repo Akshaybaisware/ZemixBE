@@ -868,48 +868,42 @@ const add_terms = async (req, res) => {
     }
 
     const startDate = new Date(startdate);
-    startDate.toLocaleDateString("en-CA");
+    startDate.setUTCHours(0, 0, 0, 0); // Set time to midnight for DateOnly effect
 
-    const endDate = new Date(startdate); // Create a new Date object from startdate
+    const endDate = new Date(startDate); // Create a new Date object from startdate
     endDate.setDate(endDate.getDate() + 5);
-    const endDateFormatted = endDate.toLocaleDateString("en-CA"); // Adjust locale if necessary
 
-    user.startDate = startdate;
-    user.endDate = endDateFormatted;
+    user.startDate = startDate;
+    user.endDate = endDate;
     user.status = "Pending";
 
     // Save the user with the updated status
     await user.save();
 
-    let signatureFile, photoFile;
-
-    let signatureUploadurl, photoUploadurl;
-
-    console.log("1");
+    let signatureUrl, photoUrl;
 
     if (signature) {
       // Upload signature file to Cloudinary
       const signatureUpload = await cloudinary.uploader.upload(
-        signature[0].buffer
+        signature[0].path
       );
-      signatureUploadurl = signatureUpload.secure_url;
+      signatureUrl = signatureUpload.secure_url;
     }
 
     if (photo) {
       // Upload photo file to Cloudinary
-      const photoUpload = await cloudinary.uploader.upload(photo[0].buffer);
-      photoUploadurl = photoUpload.secure_url;
+      const photoUpload = await cloudinary.uploader.upload(photo[0].path);
+      photoUrl = photoUpload.secure_url;
     }
 
     // Create a new agreement instance
     const newAgreement = new agreementSchema({
       email,
-      signature: signatureUploadurl,
-      photo: photoUploadurl,
+      signature: signatureUrl,
+      photo: photoUrl,
       startdate: startDate,
     });
 
-    console.log("2");
     // Save the agreement to the database
     const savedAgreement = await newAgreement.save();
 
@@ -917,12 +911,13 @@ const add_terms = async (req, res) => {
     res.status(201).json(savedAgreement);
   } catch (error) {
     console.error(error.message);
-    console.log("3");
     res
       .status(500)
       .json({ error: "Internal Server Error", message: error.message });
   }
 };
+
+module.exports = add_terms;
 
 module.exports = {
   add_user,
