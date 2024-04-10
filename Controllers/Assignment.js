@@ -54,7 +54,7 @@ const add_assignment = async(req, res) => {
 };
 const get_assignments = async(req, res) => {
     try {
-        const allAssignments = await new_Assignment.find();
+        const allAssignments = await new_assignmentSchema.find();
         res.status(200).json({ assignments: allAssignments });
     } catch (error) {
         console.error("Error fetching assignments:", error);
