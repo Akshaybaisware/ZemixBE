@@ -10,6 +10,13 @@ const userRegisterationSchema = require("../Models/UserRegisteration");
 const agreementSchema = require("../Models/Aggrement.js");
 const cloudinary = require("cloudinary").v2;
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 const { randomBytes } = require("crypto");
 
 const generateRandomPassword = () => {
@@ -842,57 +849,75 @@ const sendemailforretry = async (req, res) => {
 const add_terms = async (req, res) => {
   try {
     const { email, startdate } = req.body;
+
     // Ensure that the files are present in the request
     if (!req.files || !req.files["signature"] || !req.files["photo"]) {
       return res
         .status(400)
         .json({ error: "Signature and photo files are required." });
     }
+
     const { signature, photo } = req.files;
-    console.log(req.files, "body");
 
     // Use findOne to get a single document
     const user = await User.findOne({ email: email });
+
     // Check if the user exists
     if (!user) {
       return res.status(404).json({ error: "User not found." });
     }
+
     const startDate = new Date(startdate);
     startDate.toLocaleDateString("en-CA");
+
     const endDate = new Date(startdate); // Create a new Date object from startdate
-    endDate.setDate(endDate.getDate() + 4);
+    endDate.setDate(endDate.getDate() + 5);
     const endDateFormatted = endDate.toLocaleDateString("en-CA"); // Adjust locale if necessary
+
     user.startDate = startdate;
     user.endDate = endDateFormatted;
     user.status = "Pending";
+
     // Save the user with the updated status
     await user.save();
-    // Get the file path of the uploaded signature and photo
 
     let signatureFile, photoFile;
 
+    let signatureUploadurl, photoUploadurl;
+
+    console.log("1");
+
     if (signature) {
-      signatureFile = await cloudinary(signature[0].buffer);
+      // Upload signature file to Cloudinary
+      const signatureUpload = await cloudinary.uploader.upload(
+        signature[0].buffer
+      );
+      signatureUploadurl = signatureUpload.secure_url;
     }
+
     if (photo) {
-      photoFile = await cloudinary(photo[0].buffer);
+      // Upload photo file to Cloudinary
+      const photoUpload = await cloudinary.uploader.upload(photo[0].buffer);
+      photoUploadurl = photoUpload.secure_url;
     }
-    // const signatureFilePath = req.files['signature'][0].path;
-    // const photoFilePath = req.files['photo'][0].path;
+
     // Create a new agreement instance
     const newAgreement = new agreementSchema({
       email,
-      signature: signatureFile?.secure_url,
-      photo: photoFile?.secure_url,
+      signature: signatureUploadurl,
+      photo: photoUploadurl,
       startdate: startDate,
     });
+
+    console.log("2");
     // Save the agreement to the database
     const savedAgreement = await newAgreement.save();
-    console.log(savedAgreement, "saved");
+
     // Respond with the saved agreement
     res.status(201).json(savedAgreement);
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
+    console.log("3");
     res
       .status(500)
       .json({ error: "Internal Server Error", message: error.message });
