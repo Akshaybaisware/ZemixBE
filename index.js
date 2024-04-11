@@ -18,6 +18,7 @@ app.use('/api/assignment', require('./Routes/assignment'));
 app.use('/api/auth', require('./Routes/auth'));
 app.use('/api/terms', require('./Routes/terms'));
 app.use('/api/package', require('./Routes/package'));
+app.use('/api/aggriment', require("./Routes/Agriment"));
 // Default route
 app.get("/", (req, res) => {
     res.send("Hello World");
