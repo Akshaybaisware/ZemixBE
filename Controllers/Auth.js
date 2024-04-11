@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { sendConfirmationEmail } = require('../Utils/mail');
 const UserLogin = require("../Models/UserLogin");
-
+const adminloginSchema = require("../Models/Admin");
 
 
 
@@ -76,7 +76,7 @@ const adminsignin = async(req, res) => {
             return res.status(400).json({ message: 'Email and password are required.' });
         }
         // Find the user by email
-        const user = await AdminLogin.findOne({ firstname: username, password: password });
+        const user = await adminloginSchema.findOne({ firstname: username, password: password });
         const role = user.role;
         // Check if the user exists
         if (!user) {

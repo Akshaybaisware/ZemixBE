@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
     role: { type: String, default: 'User' },
     totalAssignmentLimit: { type: Number, default: 480 },
     submittedAssignmentCount: { type: Number, default: 0 },
-    pendingAssignmentCount: { type: Number, default: 520 },
+    pendingAssignmentCount: { type: Number, default: 480 },
     correctAssignmentCount: { type: Number },
     incorrectAssignmentCount: { type: Number }
 }, { timestamps: true });

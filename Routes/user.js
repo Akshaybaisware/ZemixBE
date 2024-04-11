@@ -58,7 +58,7 @@ router.post('/searchusers', search_users);
 router.get('/getuserbyid/:id', getuser_by_id);
 router.post('/searchuserbyname', search_user_by_name);
 router.post('/userpagination', user_pagination);
-router.get('/senduserinfo', sendUserInfo);
+router.post('/senduserinfo', sendUserInfo);
 router.post('/updateenddate/:id', update_endDate);
 router.post('/recoveryuser', recovery_user);
 router.post('/searchuserrecovery', search_user_recovery);
