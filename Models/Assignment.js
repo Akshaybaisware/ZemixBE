@@ -28,6 +28,9 @@ const new_assignmentSchema = new mongoose.Schema({
     userId: {
         type: String,
     },
+    status: { type: String },
+}, {
+    timestamps: true
 });
 
 module.exports = mongoose.model('new_Assignment', new_assignmentSchema);

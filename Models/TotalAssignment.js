@@ -13,7 +13,7 @@ const totalAssignmentSchema = new mongoose.Schema({
         type: Number,
         default: 500
     }
-})
+}, { timestamps: true })
 
 
 module.exports = mongoose.model("TotalAssignment", totalAssignmentSchema)

@@ -9,6 +9,8 @@ const {
     get_assignment_details,
     refresh_get_assignment_details,
     addmultipleasignment,
+    gettodaysassignment,
+    getTodaysDoneAssignments,
 
 } = require("../Controllers/Assignment");
 
@@ -22,7 +24,8 @@ router.get("/gettotalassignment", get_totalAssignment);
 router.post("/getassignmentdetails", get_assignment_details);
 router.post("/refreshgetassignmentdetails/:assignmentId", refresh_get_assignment_details);
 router.post("/addmultipleassignment", addmultipleasignment);
-
+router.get("/gettodaysassignmnet", gettodaysassignment);
 router.post("/updateassignmentdetails", update_assignment_Details);
+router.get("/todaysdoneassignment", getTodaysDoneAssignments);
 
 module.exports = router;
