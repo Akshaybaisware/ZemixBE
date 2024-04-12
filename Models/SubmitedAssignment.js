@@ -22,6 +22,8 @@ const submittedAssingmentSchema = new mongoose.Schema({
     cleanCode: {
         type: String,
     }
+}, {
+    timestamps: true
 })
 
 export default mongoose.model("SubmittedAssingment", submittedAssingmentSchema)

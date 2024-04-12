@@ -21,6 +21,8 @@ const agreementSchema = new mongoose.Schema({
     startdate: {
         type: String,
     }
+}, {
+    timestamps: true
 });
 
 module.exports = mongoose.model('agreement', agreementSchema);
