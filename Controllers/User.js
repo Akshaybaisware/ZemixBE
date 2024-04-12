@@ -397,8 +397,10 @@ const search_users = async(req, res) => {
 
 const getuser_by_id = async(req, res) => {
     try {
-        const getid = req.params.id;
-        const user = await User.findById(getid); // Corrected this line by using findById
+        // const getid = req.params.id;
+        const { userId } = req.body;
+        console.log(userId);
+        const user = await User.findById(userId); // Corrected this line by using findById
         res.status(200).json({ User: user });
     } catch (error) {
         console.error(error);

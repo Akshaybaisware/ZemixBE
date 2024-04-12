@@ -52,10 +52,14 @@ const add_assignment = async(req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 };
+
 const get_assignments = async(req, res) => {
     try {
-        const allAssignments = await new_assignmentSchema.find();
-        res.status(200).json({ assignments: allAssignments });
+
+        const { userId } = req.body;
+        const assignments = await new_assignmentSchema.find({ userId: userId });
+
+        res.status(200).json({ assignments: assignments });
     } catch (error) {
         console.error("Error fetching assignments:", error);
         res.status(500).json({ message: "Internal Server Error" });
