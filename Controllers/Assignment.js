@@ -166,37 +166,7 @@ const addmultipleasignment = async(req, res) => {
 };
 
 
-const gettodaysassignment = async(req, res) => {
-    try {
-        const response = await new_assignmentSchema.find({ createdAt: { $gte: new Date(new Date().setHours(00, 00, 00)), $lt: new Date(new Date().setHours(23, 59, 59)) } });
-        res.status(200).json({ response, message: "Todays Assignment" });
 
-
-    } catch (error) {
-        res.status(500).json({ message: "Internal Server Error", Error: error.message });
-
-    }
-
-};
-
-const getTodaysDoneAssignments = async(req, res) => {
-    try {
-        // Ensuring that we're using the start and end of the current day in the server's local timezone.
-        const startOfDay = new Date(new Date().setHours(0, 0, 0, 0));
-        const endOfDay = new Date(new Date().setHours(23, 59, 59, 999));
-
-        // Finding assignments created today with a status of "done".
-        const doneAssignments = await new_assignmentSchema.find({
-            createdAt: { $gte: startOfDay, $lt: endOfDay },
-            status: "done"
-        });
-
-        res.status(200).json({ doneAssignments, message: "Today's Done Assignments" });
-    } catch (error) {
-        console.error(error); // It's a good practice to log the error
-        res.status(500).json({ message: "Internal Server Error", error: error.message });
-    }
-};
 
 
 module.exports = {
@@ -206,6 +176,5 @@ module.exports = {
     get_assignment_details,
     refresh_get_assignment_details,
     addmultipleasignment,
-    gettodaysassignment,
-    getTodaysDoneAssignments
+
 };

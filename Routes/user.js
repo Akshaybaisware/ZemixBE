@@ -2,6 +2,7 @@
 Node.js application using Express framework. Here's a breakdown of what the code is doing: */
 const router = require('express').Router();
 
+const { getTodaysRegistrations } = require('../Controllers/Terms');
 const {
     add_user,
     userlogin,
@@ -34,7 +35,9 @@ const {
     gettodaysrecovery,
     deleteclient,
     sendemailforretry,
-    add_terms
+    add_terms,
+    getTodayDone,
+    gettoadysassignment
 
 
 
@@ -78,6 +81,11 @@ router.post('/add_terms', upload.fields([
     { name: 'signature', maxCount: 1 },
     { name: 'photo', maxCount: 1 }
 ]), add_terms);
+
+router.get("/gettodaysregister", gettoadysassignment);
+router.get(
+    "/gettodaysdone", getTodayDone
+);
 
 
 

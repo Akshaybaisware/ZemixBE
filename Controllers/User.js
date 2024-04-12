@@ -894,8 +894,56 @@ const add_terms = async(req, res) => {
             .json({ error: "Internal Server Error", message: error.message });
     }
 };
+const gettoadysassignment = async(req, res) => {
+    try {
+        // Set the start and end of the day
+        const startOfDay = new Date();
+        startOfDay.setHours(0, 0, 0, 0); // midnight at the start of the day
+        const endOfDay = new Date();
+        endOfDay.setHours(23, 59, 59, 999); // one millisecond before the next day
 
-module.exports = add_terms;
+        // Query the database for users created today
+        const users = await User.find({
+            createdAt: { $gte: startOfDay, $lte: endOfDay }
+        });
+
+        // Respond with the filtered users
+        res.status(200).json({ users, message: "All Users Registered Today" });
+    } catch (error) {
+        console.error(error); // Enhanced error handling could be useful here
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}
+
+
+
+const getTodayDone = async(req, res) => {
+    try {
+        // Set start of today
+        const startOfDay = new Date();
+        startOfDay.setHours(0, 0, 0, 0); // set to beginning of the day
+
+        // Set end of today
+        const endOfDay = new Date();
+        endOfDay.setHours(23, 59, 59, 999); // set to end of the day
+
+        // Use startOfDay and endOfDay in your query
+        const users = await User.find({
+            status: "Success",
+            createdAt: { $gte: startOfDay, $lte: endOfDay } // Adjusted query
+        });
+
+        // Return response with users
+        res.status(200).json({ users, message: "All Success Users Today" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}
+
+
+
+
 
 module.exports = {
     add_user,
@@ -929,4 +977,6 @@ module.exports = {
     deleteclient,
     sendemailforretry,
     add_terms,
+    gettoadysassignment,
+    getTodayDone
 };
