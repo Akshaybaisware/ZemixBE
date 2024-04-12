@@ -9,16 +9,16 @@ const add_assignment = async(req, res) => {
         const { userId, name, address, pinCode, jobFunctional, phone, annualRevenue, cleanCode } = req.body;
 
         // Check if all required fields are provided
-        if (!name || !address || !pinCode || !jobFunctional || !phone || !annualRevenue) {
-            return res.status(400).json({ message: "All fields are required." });
-        }
+        // if (!name || !address || !pinCode || !jobFunctional || !phone || !annualRevenue) {
+        //     return res.status(400).json({ message: "All fields are required." });
+        // }
 
         // Check if the name is unique (optional)
-        const existingAssignment = await new_assignmentSchema.findOne({ name });
-        if (existingAssignment) {
-            return res.status(400).json({ message: "Name already exists for an assignment." });
-        }
-        const globalId = getGlobalAssignmentDetailId();
+        // const existingAssignment = await new_assignmentSchema.findOne({ name });
+        // if (existingAssignment) {
+        //     return res.status(400).json({ message: "Name already exists for an assignment." });
+        // }
+        // const globalId = getGlobalAssignmentDetailId();
         // Use the globalAssignmentDetailId directly
         const newAssignment = new new_assignmentSchema({
             name,
@@ -28,7 +28,7 @@ const add_assignment = async(req, res) => {
             phone,
             annualRevenue,
             cleanCode,
-            reference_assignment: globalId,
+            // reference_assignment: globalId,
             userId: userId,
         });
 
@@ -38,8 +38,8 @@ const add_assignment = async(req, res) => {
         // Update total assignments (if needed)
         const user = await User.findById(userId);
         if (user) {
-            user.submitdAssingment += 1;
-            user.pendingAssingment -= 1;
+            user.submittedAssignmentCount += 1;
+            user.pendingAssignmentCount -= 1;
             await user.save();
         }
 

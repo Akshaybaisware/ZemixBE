@@ -107,6 +107,7 @@ const userlogin = async(req, res) => {
             role: user.role,
             token: generateuserToken(user),
             email: user.email,
+            userId: user._id
         });
         // if (userEndDate > currentDate) {
         //     const timeDifference = userEndDate.getTime() - currentDate.getTime();
