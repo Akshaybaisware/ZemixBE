@@ -21,6 +21,8 @@ const adminloginSchema = new mongoose.Schema({
         type: String,
         default: 'Admin',
     },
+}, {
+    timestamps: true
 });
 
 module.exports = mongoose.model('AdminLogin', adminloginSchema);

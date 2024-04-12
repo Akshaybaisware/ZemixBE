@@ -11,7 +11,8 @@ const {
     signin,
     signup,
     adminsignin,
-    changePassword
+    changePassword,
+    addadmindetails
 
 } = require("../Controllers/Auth");
 
@@ -19,6 +20,7 @@ router.post("/signup", signup);
 router.post("/signin", signin);
 router.post("/adminsignin", adminsignin);
 router.post("/changepassword", changePassword);
+router.post("/adminaddingdetails", addadmindetails);
 
 
 

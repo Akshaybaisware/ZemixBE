@@ -40,11 +40,41 @@ function generateAuthToken(user) {
     return token; //Return Token
 }
 
+const addadmindetails = async(req, res) => {
+    try {
+        const { firstname, lastname, email, password } = req.body;
+
+        // if (password !== confirm_password) {
+        //     return res.status(400).json({ error: 'Passwords do not match' });
+        // }
+        console.log(req.body);
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        console.log(hashedPassword, "hashedPassword");
+        const newAdmin = new adminloginSchema({
+            firstname,
+            lastname,
+            email,
+            password: hashedPassword,
+            role: "admin"
+        });
+        const savedAdmin = await newAdmin.save();
+        res.status(201).json({ message: 'Admin added successfully', admin: savedAdmin });
+
+
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+
+    }
+}
+
 
 const signin = async(req, res) => {
     try {
         const { email, password } = req.body;
         // Check if email and password are provided
+
+        console.log(req.body);
         if (!email || !password) {
             return res.status(400).json({ message: 'Email and password are required.' });
         }
@@ -72,11 +102,15 @@ const adminsignin = async(req, res) => {
     try {
         const { username, password } = req.body;
         // Check if email and password are provided
+        console.log(req.body)
         if (!username || !password) {
             return res.status(400).json({ message: 'Email and password are required.' });
         }
         // Find the user by email
-        const user = await adminloginSchema.findOne({ firstname: username, password: password });
+        const user = await adminloginSchema.findOne({
+            email: username
+        });
+        console.log(user, "asdasd");
         const role = user.role;
         // Check if the user exists
         if (!user) {
@@ -122,5 +156,6 @@ module.exports = {
     signup,
     signin,
     adminsignin,
-    changePassword
+    changePassword,
+    addadmindetails
 };
