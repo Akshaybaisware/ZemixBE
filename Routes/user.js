@@ -37,7 +37,9 @@ const {
     sendemailforretry,
     add_terms,
     getTodayDone,
-    gettoadysassignment
+    gettoadysassignment,
+    get_report_by_id,
+    get_incorrect_assignments
 
 
 
@@ -86,7 +88,8 @@ router.get("/gettodaysregister", gettoadysassignment);
 router.get(
     "/gettodaysdone", getTodayDone
 );
-
+router.post("/getreportbyid", get_report_by_id);
+router.post("/getincorrectassignment", get_incorrect_assignments);
 
 
 module.exports = router;

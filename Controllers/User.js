@@ -945,7 +945,81 @@ const getTodayDone = async(req, res) => {
 }
 
 
+const get_report_by_id = async(req, res) => {
+    try {
+        //const id = req.params.id;
+        const { id } = req.body;
+        const user = await User.findOne({ _id: id });
 
+        if (user) {
+            if (user.submittedAssignmentCount === 480) {
+                // Check if incorrectAssignment and correctAssignment are already set
+                if (!user.incorrectAssignmentCount || !user.correctAssignmentCount) {
+                    const correct = user.correctAssignmentCount = generateRandomNumber();
+                    user.incorrectAssignmentCount = 480 - correct;
+                    user.save();
+                    res.status(200).json({ message: 'User Report...', user });
+                } else {
+                    res.status(200).json({ message: 'User Report ...', user });
+                }
+            } else {
+                return res.status(200).json({ error: 'User did not fill all Assignments', user });
+            }
+        } else {
+            return res.status(400).json({ message: 'User Not Found.' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error...' });
+    }
+};
+
+
+const get_incorrect_assignments = async(req, res) => {
+    try {
+        //const userId = req.params.id;
+        const { id } = req.body;
+        console.log(id, "id is ");
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({ message: 'User Not found' });
+        }
+        const incorrectAssignmentCount = user.incorrectAssignmentCount;
+        if (!incorrectAssignmentCount || incorrectAssignmentCount === 0) {
+            return res.status(200).json({ message: 'No incorrect assignments found for the user' });
+        }
+        // Retrieve random incorrect assignments from the new_Assignment schema
+        const randomIncorrectAssignments = await new_Assignment.aggregate([
+            { $match: { userId: id } },
+            { $sample: { size: incorrectAssignmentCount } },
+        ]);
+        res.status(200).json({ message: 'Incorrect Assignments', incorrectAssignment: randomIncorrectAssignments });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+
+const usersubmitassignment = async(req, res) => {
+    try {
+        const { userId, name, address, pinCode, jobFunctional, phone, annualRevenue, cleanCode } = req.body;
+
+        const finduser = await User.findById(userId);
+
+        if (!finduser) {
+            return res.status(404).json({ message: "User not found" });
+
+        }
+
+
+
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error" });
+
+    }
+
+}
 
 
 module.exports = {
@@ -981,5 +1055,7 @@ module.exports = {
     sendemailforretry,
     add_terms,
     gettoadysassignment,
-    getTodayDone
+    getTodayDone,
+    get_report_by_id,
+    get_incorrect_assignments
 };
