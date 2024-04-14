@@ -152,10 +152,36 @@ const changePassword = async(req, res) => {
 }
 
 
+const forgetpasswordadmin = async(req, res) => {
+    try {
+        const {
+            userEmail,
+            newPassword,
+            confirmPassword
+        } = req.body;
+        console.log(req.body);
+        const admin = await adminloginSchema.findOne({ email: userEmail });
+        console.log(admin);
+        if (!admin) {
+            return res.status(404).json({ message: "Admin not found" });
+        }
+        if (newPassword !== confirmPassword) {
+            return res.status(400).json({ message: "Passwords do not match" });
+        }
+        admin.password = newPassword;
+        await admin.save();
+        res.status(200).json({ message: "Password reset successfully" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error resetting password" });
+    }
+}
+
 module.exports = {
     signup,
     signin,
     adminsignin,
     changePassword,
-    addadmindetails
+    addadmindetails,
+    forgetpasswordadmin
 };
