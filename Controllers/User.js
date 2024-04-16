@@ -739,7 +739,7 @@ const getallinactiveusers = async(req, res) => {
 
 const getallpending = async(req, res) => {
     try {
-        const users = await User.find({ status: "Pending" });
+        const users = await User.find({ status: "Pending" }).sort({ createdAt: -1 });
         res.status(200).json({ users, message: "All Pending Users" });
     } catch (error) {
         console.error(error);
