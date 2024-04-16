@@ -77,7 +77,7 @@ router.get('/getallactive', getallactive);
 router.get('/getallcancel', getallcancel);
 router.get('/getallregistered', getallregistered);
 router.get('/gettodaysregisterations', gettodaysrecovery);
-router.delete('/deleteclient', deleteclient);
+router.post('/deleteclient', deleteclient);
 router.post('/sendconfirmmail', sendemailforretry);
 router.post('/add_terms', upload.fields([
     { name: 'signature', maxCount: 1 },

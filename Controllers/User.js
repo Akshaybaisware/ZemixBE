@@ -802,7 +802,8 @@ const gettodaysrecovery = async(req, res) => {
 
 const deleteclient = async(req, res) => {
     try {
-        const { id } = req.params;
+        // const { id } = req.params;
+        const { id } = req.body;
         console.log(id);
         const user = await User.findByIdAndDelete(id);
         res
