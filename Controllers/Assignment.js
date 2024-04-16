@@ -56,8 +56,9 @@ const add_assignment = async(req, res) => {
 const get_assignments = async(req, res) => {
     try {
 
-        const { userId } = req.body;
-        const assignments = await new_assignmentSchema.find({ userId: userId });
+        // const { userId } = req.body;
+        // const assignments = await new_assignmentSchema.find({ userId: userId });
+        const assignments = await new_assignmentSchema.find();
 
         res.status(200).json({ assignments: assignments });
     } catch (error) {
