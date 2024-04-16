@@ -537,7 +537,7 @@ const sendUserInfo = async(req, res) => {
     <p style="font-size: 16px;">Email : helplinewwwtricom54@gmail.com</p>
     <p style="font-size: 16px;">Helpline Number : 8446258993</p>
     <p style="font-size: 16px;">Thanking You</p>
-    <p style="font-size: 16px;"><strong>Cronton Services</strong></p>
+    <p style="font-size: 16px;"><strong>Cropton Services</strong></p>
 </div>
 `,
 
