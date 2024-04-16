@@ -493,7 +493,7 @@ const sendUserInfo = async(req, res) => {
             return res.status(400).json({ error: "Invalid userID format" });
         }
 
-        const user = await userSchema.findById({ _id: userID });
+        const user = await User.findById({ _id: userID });
         console.log(user, "userin the db ");
         const aggrUserId = await agreementSchema.findOne({ email: user.email });
         console.log(aggrUserId, "aggrUserId");
@@ -530,10 +530,14 @@ const sendUserInfo = async(req, res) => {
         <li style="font-size: 16px;"><strong>Email:</strong> ${user.email}</li>
         <li style="font-size: 16px;"><strong>Phone:</strong> ${user.mobile}</li>
     </ul>
-    <p style="font-size: 16px; text-align: justify;">Login To Your Account From Here</p>
+    <p style="font-size: 16px; text-align: justify;">
+    <a href="http://localhost:5173/userlogin"> Login To Your Account From Here</p></a>
     <p style="font-size: 16px;"><strong>Username:</strong> ${user.username || user.email}</p>
     <p style="font-size: 16px;"><strong>Password:</strong> ${user.password}</p>
-    <p style="font-size: 16px;"><a href="${process.env.FRONTEND_URL}/download-agreement/${aggrUserId._id}" style="color: #007bff; text-decoration: none;">Click Here To Download Your Legal Agreement.</a></p>
+    <p style="font-size: 16px;"><a href="http://localhost:5173/stamppaperdonwload/${user.email}" style="color: #007bff; text-decoration: none;">
+
+
+   Click Here To Download Your Legal Agreement.</a></p>
     <p style="font-size: 16px;">Email : helplinewwwtricom54@gmail.com</p>
     <p style="font-size: 16px;">Helpline Number : 8446258993</p>
     <p style="font-size: 16px;">Thanking You</p>
@@ -697,9 +701,9 @@ const addclient = async(req, res) => {
             plan,
             password,
             selectPlan,
-            registeratonDate: Date.now(),
+            registrationDate: Date.now(),
         });
-
+        console.log(newclient, "newclient");
         const savedclient = await newclient.save();
 
         sendConfirmationEmail(email);

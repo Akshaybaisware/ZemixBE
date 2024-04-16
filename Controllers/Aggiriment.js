@@ -1,10 +1,19 @@
 const mongoose = require('mongoose');
 const agreementSchema = require("../Models/Aggrement");
+const User = require("../Models/User");
 
 const getaggrimentdetails = async(req, res) => {
     try {
-        const email = req.body.email;
-        console.log(email);
+        const { email } = req.body;
+        //const { id } = req.body;
+        // console.log(id)
+
+        //const data = await User.findOne({ _id: id });
+        //console.log(data);
+        //
+        //const email = data.email;
+        //console.log(email);
+        //661e77f6824dc31e830614ce
         const response = await agreementSchema.findOne({ email: email });
         console.log(response);
         res.status(200).json({
@@ -14,7 +23,7 @@ const getaggrimentdetails = async(req, res) => {
     } catch (error) {
 
         res.status(500).json({
-            message: "Internal Server Error",
+            message: "Internal Server Error" + error.message,
         });
 
     }

@@ -20,20 +20,20 @@ const add_assignment = async(req, res) => {
         // }
         // const globalId = getGlobalAssignmentDetailId();
         // Use the globalAssignmentDetailId directly
-        const newAssignment = new new_assignmentSchema({
-            name,
-            address,
-            pinCode,
-            jobFunctional,
-            phone,
-            annualRevenue,
-            cleanCode,
-            // reference_assignment: globalId,
-            userId: userId,
-        });
+        // const newAssignment = new new_assignmentSchema({
+        //  name,
+        // address,
+        // pinCode,
+        // jobFunctional,
+        //  phone,
+        //  annualRevenue,
+        // cleanCode,
+        // reference_assignment: globalId,
+        //  userId: userId,
+        //  });
 
         // Save the new assignment
-        const savedAssignment = await newAssignment.save();
+        //const savedAssignment = await newAssignment.save();
 
         // Update total assignments (if needed)
         const user = await User.findById(userId);
@@ -45,7 +45,7 @@ const add_assignment = async(req, res) => {
 
         res.status(201).json({
             message: "Assignment added successfully",
-            assignment: savedAssignment,
+
         });
     } catch (error) {
         console.error("Error adding assignment:", error);
