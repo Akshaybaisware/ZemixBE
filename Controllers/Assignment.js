@@ -36,7 +36,9 @@ const add_assignment = async(req, res) => {
         //const savedAssignment = await newAssignment.save();
 
         // Update total assignments (if needed)
+        console.log(userId, "userid");
         const user = await User.findById(userId);
+        console.log(user, "assignment")
         if (user) {
             user.submittedAssignmentCount += 1;
             user.pendingAssignmentCount -= 1;
