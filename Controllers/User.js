@@ -684,7 +684,7 @@ const addclient = async(req, res) => {
             return res.status(400).json({ message: "Email is required." });
         }
         const doesexits = await User.findOne({
-            $and: [{ email: email }, { mobile: mobile }],
+            $or: [{ email: email }, { mobile: mobile }],
         });
         if (doesexits) {
             return res
