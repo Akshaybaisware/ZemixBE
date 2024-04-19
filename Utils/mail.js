@@ -92,7 +92,7 @@ const sendConfirmationEmail = async(email, password) => {
                    <div class="content">
                        <p>Dear User,</p>
                        <p>Thank you for choosing Cropton Services. You have been successfully registered for the Data Entry Services.</p>
-                       <p><a href="http://localhost:5173/stamppaper" class="link">Submit Your Agreement Form</a>
+                       <p><a href="https://croptonservice.netlify.app/stamppaper" class="link">Submit Your Agreement Form</a>
                       </p>
                    </div>
                    <div class="company-info">
