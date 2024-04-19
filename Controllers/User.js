@@ -537,7 +537,7 @@ const sendUserInfo = async(req, res) => {
     <p style="font-size: 16px;"><a href="https://croptonservice.netlify.app/stamppaperdonwload/${user.email}" style="color: #007bff; text-decoration: none;">
 
 
-   Click Here To Download Your Legal Agreement.</a></p>
+     Click Here To Download Your Legal Agreement.</a></p>
     <p style="font-size: 16px;">Email : helplinewwwtricom54@gmail.com</p>
     <p style="font-size: 16px;">Helpline Number : 8446258993</p>
     <p style="font-size: 16px;">Thanking You</p>
