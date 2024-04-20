@@ -344,7 +344,7 @@ const delete_user = async(req, res) => {
 const edit_user = async(req, res) => {
     try {
         const userId = req.params.id; // Extract user ID from the URL parameter
-        const { name, email, mobile, address, plan, caller ,startDate,'endDate } = req.body;
+        const { name, email, mobile, address, plan, caller ,startDate,endDate } = req.body;
         if (!userId) {
             return res.status(400).json({ message: "User ID is required." });
         }
