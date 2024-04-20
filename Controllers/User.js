@@ -538,7 +538,7 @@ const sendUserInfo = async(req, res) => {
 
 
      Click Here To Download Your Legal Agreement.</a></p>
-    <p style="font-size: 16px;">Email : helplinewwwtricom54@gmail.com</p>
+    <p style="font-size: 16px;">Email : helplinessrvice156@gmail.com</p>
     <p style="font-size: 16px;">Helpline Number : 8446258993</p>
     <p style="font-size: 16px;">Thanking You</p>
     <p style="font-size: 16px;"><strong>Cropton Services</strong></p>
