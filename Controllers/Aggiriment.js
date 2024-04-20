@@ -30,6 +30,24 @@ const getaggrimentdetails = async(req, res) => {
 
 }
 
+
+const deleteaggriment = async(req, res) => {
+    try {
+        const { email } = req.body;
+        console.log(req.body);
+        const res = await agreementSchema.deleteOne({ email: email });
+        res.status(200).json({
+            message: "Aggrement Deleted",
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Internal Server Error" + error.message,
+        });
+    }
+}
+
 module.exports = {
     getaggrimentdetails,
+    deleteaggriment
 }
