@@ -325,7 +325,8 @@ const update_user_status = async(req, res) => {
 
 const delete_user = async(req, res) => {
     try {
-        const userId = req.params.id;
+        // const userId = req.params.id;
+        const { userId } = req.body;
         // Check if userId is provided
         if (!userId) {
             return res.status(400).json({ message: "User ID is required." });

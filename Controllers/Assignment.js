@@ -58,9 +58,10 @@ const add_assignment = async(req, res) => {
 const get_assignments = async(req, res) => {
     try {
 
-        // const { userId } = req.body;
-        // const assignments = await new_assignmentSchema.find({ userId: userId });
-        const assignments = await new_assignmentSchema.find();
+        const { userId } = req.body;
+        console.log(userId, "userId");
+        const assignments = await new_assignmentSchema.find({ userId: userId });
+        // const assignments = await new_assignmentSchema.find();
 
         res.status(200).json({ assignments: assignments });
     } catch (error) {
@@ -91,14 +92,16 @@ const get_assignment_details = async(req, res) => {
     console.log("inside get assignments");
     try {
         // Find the user by email
-        const user = await User.findOne({ email: req.body.email });
+        const { email } = req.body;
+        const user = await User.findOne({ email });
+        console.log(user);
         // Check if the user exists
         if (!user) {
             return res.status(404).json({ message: "User not found." });
         }
         // Check if assignmentDetailIds is available
         const assignmentDetailIds = user.assignmentDetailIds || [];
-        const availableAssignmentDetails = await AssingmentDetails.find({
+        const availableAssignmentDetails = await new_assignmentSchema.find({
             _id: {
                 $nin: assignmentDetailIds,
             },
@@ -119,7 +122,7 @@ const get_assignment_details = async(req, res) => {
         }
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: "Internal Server Error" });
+        return res.status(500).json({ message: "Internal Server Error", msg: error.message });
     }
 };
 const refresh_get_assignment_details = async(req, res) => {

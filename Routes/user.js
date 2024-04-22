@@ -58,7 +58,7 @@ router.get('/getalluser', get_all_user);
 router.post('/verifyotp', verify_otp);
 router.post('/getuserbystatus', getuser_by_status);
 router.post('/updatestatus/:id', update_user_status);
-router.delete('/deleteuser/:id', delete_user);
+router.post('/deleteuser', delete_user);
 router.put('/edituser/:id', edit_user);
 router.post('/searchusers', search_users);
 router.post('/getuserbyid', getuser_by_id);
