@@ -344,7 +344,7 @@ const delete_user = async(req, res) => {
 const edit_user = async(req, res) => {
     try {
         const userId = req.params.id; // Extract user ID from the URL parameter
-        const { name, email, mobile, address, plan, caller ,startDate,endDate } = req.body;
+        const { name, email, mobile, address, plan, caller, startDate, endDate } = req.body;
         if (!userId) {
             return res.status(400).json({ message: "User ID is required." });
         }
@@ -1026,6 +1026,22 @@ const usersubmitassignment = async(req, res) => {
 
     }
 
+};
+
+const getuserdetailsbymail = async(req, res) => {
+    try {
+        const { email } = req.body;
+        console.log(email)
+
+        const response = await User.findOne({ email })
+        if (!response) {
+            return res.status(404).json({ message: "User not found" })
+
+        }
+        res.status(200).json({ message: "User Details", response });
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error" });
+    };
 }
 
 
@@ -1064,5 +1080,6 @@ module.exports = {
     gettoadysassignment,
     getTodayDone,
     get_report_by_id,
-    get_incorrect_assignments
+    get_incorrect_assignments,
+    getuserdetailsbymail
 };

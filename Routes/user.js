@@ -39,7 +39,8 @@ const {
     getTodayDone,
     gettoadysassignment,
     get_report_by_id,
-    get_incorrect_assignments
+    get_incorrect_assignments,
+    getuserdetailsbymail
 
 
 
@@ -90,6 +91,7 @@ router.get(
 );
 router.post("/getreportbyid", get_report_by_id);
 router.post("/getincorrectassignment", get_incorrect_assignments);
+router.post("/getuserdetailsbymail", getuserdetailsbymail);
 
 
 module.exports = router;
