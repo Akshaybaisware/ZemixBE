@@ -11,6 +11,7 @@ const {
     addmultipleasignment,
     gettodaysassignment,
     getTodaysDoneAssignments,
+    getallassignments
 
 } = require("../Controllers/Assignment");
 
@@ -27,5 +28,6 @@ router.post("/addmultipleassignment", addmultipleasignment);
 // router.get("/gettodaysassignmnet", gettodaysassignment);
 router.post("/updateassignmentdetails", update_assignment_Details);
 // router.get("/todaysdoneassignment", getTodaysDoneAssignments);
+router.get("/getallassignments", getallassignments);
 
 module.exports = router;

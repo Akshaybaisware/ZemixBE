@@ -176,6 +176,16 @@ const addmultipleasignment = async(req, res) => {
 };
 
 
+const getallassignments = async(req, res) => {
+    try {
+        const assignments = await new_assignmentSchema.find();
+        res.status(200).json({ assignments: assignments });
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server Error", error: error.message });
+    }
+};
+
+
 
 
 
@@ -186,5 +196,6 @@ module.exports = {
     get_assignment_details,
     refresh_get_assignment_details,
     addmultipleasignment,
+    getallassignments
 
 };
