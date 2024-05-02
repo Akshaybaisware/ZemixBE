@@ -102,6 +102,10 @@ const userlogin = async(req, res) => {
         const isWithin12Hours = new Date(
             userEndDate.getTime() + 12 * 60 * 60 * 1000
         );
+        // user.endDate =  ;
+
+
+
         res.status(200).json({
             message: "Login success..",
             role: user.role,
@@ -580,7 +584,8 @@ const update_endDate = async(req, res) => {
         }
         const today = new Date().toLocaleDateString("en-CA"); // Adjust locale if necessary
         const endDate = new Date();
-        endDate.setDate(endDate.getDate() + 5);
+        endDate.setDate(endDate.getDate() + 4);
+        endDate.setUTCHours(23, 59, 59, 999);
         const endDateFormatted = endDate.toLocaleDateString("en-CA"); // Adjust locale if necessary
         // Update user fields
         user.startDate = today;
@@ -860,7 +865,8 @@ const add_terms = async(req, res) => {
         startDate.setUTCHours(0, 0, 0, 0); // Set time to midnight for DateOnly effect
 
         const endDate = new Date(startDate); // Create a new Date object from startdate
-        endDate.setDate(endDate.getDate() + 5);
+        endDate.setDate(endDate.getDate() + 4);
+        endDate.setUTCHours(23, 59, 59, 999);
 
         user.startDate = startDate;
         user.endDate = endDate;
@@ -957,6 +963,7 @@ const get_report_by_id = async(req, res) => {
     try {
         //const id = req.params.id;
         const { id } = req.body;
+        console.log(id);
         const user = await User.findOne({ _id: id });
 
         if (user) {
