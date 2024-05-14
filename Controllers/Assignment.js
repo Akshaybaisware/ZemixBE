@@ -40,7 +40,9 @@ const add_assignment = async(req, res) => {
         const user = await User.findById(userId);
         console.log(user, "assignment")
         if (user) {
-            user.submittedAssignmentCount += 1;
+            if (user.submittedAssignmentCount < 480) {
+                user.submittedAssignmentCount += 1;
+            }
             user.pendingAssignmentCount -= 1;
             await user.save();
         }
@@ -62,7 +64,7 @@ const get_assignments = async(req, res) => {
         console.log(userId, "userId");
         const assignments = await new_assignmentSchema.find({ userId: userId });
         // const assignments = await new_assignmentSchema.find();
-
+        console.log(assignments, "assignmen");
         res.status(200).json({ assignments: assignments });
     } catch (error) {
         console.error("Error fetching assignments:", error);
