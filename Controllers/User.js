@@ -111,7 +111,8 @@ const userlogin = async(req, res) => {
             role: user.role,
             token: generateuserToken(user),
             email: user.email,
-            userId: user._id
+            userId: user._id,
+            user: user
         });
         // if (userEndDate > currentDate) {
         //     const timeDifference = userEndDate.getTime() - currentDate.getTime();
@@ -119,16 +120,16 @@ const userlogin = async(req, res) => {
         //     const role = user.role;
         //     const id = user._id;
         //     console.log(id);
-        //     return res.status(200).json({ message: 'Login success..', role, days, token: generateuserToken(user), id });
+        //     return res.status(200).json({ message: 'Login success..', role, days, token: generateuserToken(user), id, user });
         // } else {
         //     if (isWithin12Hours > currentDate) {
         //         user.status = 'Freeze';
         //         await user.save();
         //         const status = user.status;
-        //         return res.status(200).json({ message: 'User status updated to Freeze', status });
+        //         return res.status(200).json({ message: 'User status updated to Freeze', user });
 
         //     } else {
-        //         return res.status(404).json({ message: 'QUC Failed' });
+        //         return res.status(404).json({ message: 'QUC Failed', user });
         //     }
 
         // }
