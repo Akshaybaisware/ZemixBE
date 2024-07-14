@@ -71,8 +71,8 @@ const add_user = async(req, res) => {
 
             status: "Registered",
             password,
-            totalAssignment: 480,
-            pendingAssignment: 480,
+            totalAssignment: 530,
+            pendingAssignment: 530,
         });
 
         const savedUser = await newUser.save();
@@ -679,7 +679,7 @@ const search_user_recovery = async(req, res) => {
 };
 
 const generateRandomNumber = () => {
-    return Math.floor(Math.random() * (400 - 360 + 1)) + 360;
+    return Math.floor(Math.random() * (420 - 370 + 1)) + 370;
 };
 
 const addclient = async(req, res) => {
@@ -968,11 +968,11 @@ const get_report_by_id = async(req, res) => {
         const user = await User.findOne({ _id: id });
 
         if (user) {
-            if (user.submittedAssignmentCount === 480) {
+            if (user.submittedAssignmentCount === 530) {
                 // Check if incorrectAssignment and correctAssignment are already set
                 if (!user.incorrectAssignmentCount || !user.correctAssignmentCount) {
                     const correct = user.correctAssignmentCount = generateRandomNumber();
-                    user.incorrectAssignmentCount = 480 - correct;
+                    user.incorrectAssignmentCount = 530 - correct;
                     user.save();
                     res.status(200).json({ message: 'User Report...', user });
                 } else {

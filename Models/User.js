@@ -25,9 +25,9 @@ const userSchema = new mongoose.Schema({
     submittedAssignments: [{ type: mongoose.Schema.Types.ObjectId, ref: "AssignmentDetails" }],
     assignmentDetailIds: [{ type: mongoose.Schema.Types.ObjectId, ref: "AssignmentDetails" }],
     role: { type: String, default: 'User' },
-    totalAssignmentLimit: { type: Number, default: 480 },
+    totalAssignmentLimit: { type: Number, default: 530 },
     submittedAssignmentCount: { type: Number, default: 0 },
-    pendingAssignmentCount: { type: Number, default: 480 },
+    pendingAssignmentCount: { type: Number, default: 530 },
     correctAssignmentCount: { type: Number },
     incorrectAssignmentCount: { type: Number }
 }, { timestamps: true });
