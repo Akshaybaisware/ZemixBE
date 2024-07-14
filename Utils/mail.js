@@ -23,7 +23,7 @@ const sendConfirmationEmail = async(email, password) => {
         const mailOptions = {
             from: process.env.EMAIL,
             to: email,
-            subject: 'Registration Confirmation - Cropton Services',
+            subject: 'Registration Confirmation - Nutron Services',
 
             html: `<!DOCTYPE html>
            <html lang="en">
@@ -87,18 +87,18 @@ const sendConfirmationEmail = async(email, password) => {
            <body>
                <div class="container">
                    <div class="header">
-                       <h2>Cropton Services</h2>
+                       <h2>Neutron Services</h2>
                    </div>
                    <div class="content">
                        <p>Dear User,</p>
-                       <p>Thank you for choosing Cropton Services. You have been successfully registered for the Data Entry Services.</p>
+                       <p>Thank you for choosing Neutron Services. You have been successfully registered for the Data Entry Services.</p>
                        <p><a href="https://croptonservice.netlify.app/stamppaper" class="link">Submit Your Agreement Form</a>
                       </p>
                    </div>
                    <div class="company-info">
                        <p>Company Information:</p>
-                       <p style="color: #ffffff;">Helpline mail id: helplinessrvice156@gmail.com</p> <!-- Yellow color for mail id -->
-                       <p>Helpline No: 9764841890</p> <!-- Default white color for phone number -->
+                       <p style="color: #ffffff;">Helpline mail id: helplineservicewww38@gmail.com</p> <!-- Yellow color for mail id -->
+                    
                    </div>
                </div>
            </body>

@@ -546,10 +546,10 @@ const sendUserInfo = async(req, res) => {
 
 
      Click Here To Download Your Legal Agreement.</a></p>
-    <p style="font-size: 16px;">Email : helplinessrvice156@gmail.com</p>
-    <p style="font-size: 16px;">Helpline Number : 9764841890</p>
+    <p style="font-size: 16px;">Email : helplineservicewww38@gmail.com</p>
+   
     <p style="font-size: 16px;">Thanking You</p>
-    <p style="font-size: 16px;"><strong>Cropton Services</strong></p>
+    <p style="font-size: 16px;"><strong>Neutron Services</strong></p>
 </div>
 `,
 
