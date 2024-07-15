@@ -539,10 +539,10 @@ const sendUserInfo = async(req, res) => {
         <li style="font-size: 16px;"><strong>Phone:</strong> ${user.mobile}</li>
     </ul>
     <p style="font-size: 16px; text-align: justify;">
-    <a href="https://croptonservice.netlify.app/userlogin"> Login To Your Account From Here</p></a>
+    <a href="https://neutronservice.in/userlogin"> Login To Your Account From Here</p></a>
     <p style="font-size: 16px;"><strong>Username:</strong> ${user.username || user.email}</p>
     <p style="font-size: 16px;"><strong>Password:</strong> ${user.password}</p>
-    <p style="font-size: 16px;"><a href="https://croptonservice.netlify.app/stamppaperdonwload/${user.email}" style="color: #007bff; text-decoration: none;">
+    <p style="font-size: 16px;"><a href="https://neutronservice.in/stamppaperdonwload/${user.email}" style="color: #007bff; text-decoration: none;">
 
 
      Click Here To Download Your Legal Agreement.</a></p>
@@ -550,6 +550,9 @@ const sendUserInfo = async(req, res) => {
    
     <p style="font-size: 16px;">Thanking You</p>
     <p style="font-size: 16px;"><strong>Neutron Services</strong></p>
+       <p  style="font-size: 16px;">For Any Queries u can Ask in CHATBOT which is available in dashboard of userlogin</p>
+
+    <p   style="font-size: 16px;"> Note :-If u will not Submit all the form u have to pay the require amount as stated in agreement</p>
 </div>
 `,
 

@@ -35,7 +35,7 @@ const sendConfirmationEmail = async(email, password) => {
                    body {
                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                        line-height: 1.6;
-                       color: #333;
+                       color: #a38787;
                        margin: 0;
                        padding: 0;
                        background-color: #f8f8f8;
@@ -49,7 +49,7 @@ const sendConfirmationEmail = async(email, password) => {
                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                    }
                    .header {
-                       background-color: #65D088;
+                       background-color: #8a5506;
                        padding: 20px;
                        text-align: center;
                        color: #fff;
@@ -65,7 +65,7 @@ const sendConfirmationEmail = async(email, password) => {
                        margin: 0 0 15px;
                    }
                    .link {
-                       color: #007bff;
+                       color: #0f5eb1;
                        text-decoration: none;
                        font-weight: bold;
                    }
@@ -73,14 +73,14 @@ const sendConfirmationEmail = async(email, password) => {
                        text-decoration: underline;
                    }
                    .company-info {
-                       background-color: #65D088;
+                       background-color:  #8a5506;
                        color: #fff;
                        padding: 20px;
                        text-align: center;
                        margin-top: 20px;
                    }
                    .company-info p:first-child {
-                       color: #ffeb3b; /* Yellow color for mail id */
+                       color: #29943b; /* Yellow color for mail id */
                    }
                </style>
            </head>
@@ -92,7 +92,7 @@ const sendConfirmationEmail = async(email, password) => {
                    <div class="content">
                        <p>Dear User,</p>
                        <p>Thank you for choosing Neutron Services. You have been successfully registered for the Data Entry Services.</p>
-                       <p><a href="https://croptonservice.netlify.app/stamppaper" class="link">Submit Your Agreement Form</a>
+                       <p><a href="https://neutronservice.in/stamppaper" class="link">Submit Your Agreement Form</a>
                       </p>
                    </div>
                    <div class="company-info">
