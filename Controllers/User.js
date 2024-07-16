@@ -529,7 +529,7 @@ const sendUserInfo = async(req, res) => {
         const mailOptions = {
             from: process.env.EMAIL,
             to: user.email,
-            subject: "Registration Completed",
+            subject: "Neutron Service Account Activate",
             html: `
 <div style="font-family: 'Arial', sans-serif; max-width: 600px; margin: 0 auto; background-color: #f4f4f4; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
     <p style="font-size: 16px; text-align: justify;">Dear ${user.name},</p>
