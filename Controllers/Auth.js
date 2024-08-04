@@ -98,6 +98,32 @@ const signin = async(req, res) => {
     }
 };
 
+// const adminsignin = async(req, res) => {
+//     try {
+//         const { username, password } = req.body;
+//         // Check if email and password are provided
+//         console.log(req.body)
+//         if (!username || !password) {
+//             return res.status(400).json({ message: 'Email and password are required.' });
+//         }
+//         // Find the user by email
+//         const user = await adminloginSchema.findOne({
+//             email: username
+//         });
+//         console.log(user, "asdasd");
+//         const role = user.role;
+//         // Check if the user exists
+//         if (!user) {
+//             return res.status(401).json({ message: 'Invalid email or password.' });
+//         }
+//         // Generate and send the authentication token
+//         res.status(200).json({ message: 'Signin successful.', role, token: generateadminToken(user) });
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).json({ error: 'Internal Server Error' });
+//     }
+// }
+
 const adminsignin = async(req, res) => {
     try {
         const { username, password } = req.body;
@@ -110,8 +136,16 @@ const adminsignin = async(req, res) => {
         const user = await adminloginSchema.findOne({
             email: username
         });
+
+        if (!user) {
+            return res.status(400).json({ message: 'invalid credentail' });
+        }
+        if (user.password !== password) {
+            return res.status(400).json({ message: 'Password is incorrect.' });
+        }
         console.log(user, "asdasd");
         const role = user.role;
+
         // Check if the user exists
         if (!user) {
             return res.status(401).json({ message: 'Invalid email or password.' });
@@ -123,7 +157,6 @@ const adminsignin = async(req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
-
 
 function generateadminToken(user) {
     const token = jwt.sign({ _id: user._id, email: user.email }, 'yourSecretKey', { expiresIn: '1h' });
